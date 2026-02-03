@@ -1,10 +1,10 @@
 // Match time in both 12 and 24-hour format
 
-import cre from 'con-reg-exp';
+import qre from 'qre';
 
-// Convenient Regular Expression
+// Quick Regular Expression
 
-const minutesAndSoOn = cre.ignoreCase`
+const minutesAndSoOn = qre.ignoreCase`
     ":", [0-5], digit;                    // Minutes
     optional {
         ":", [0-5], digit;                // Seconds
@@ -12,7 +12,7 @@ const minutesAndSoOn = cre.ignoreCase`
     }
 `;
 
-const time = cre.global.ignoreCase`
+const time = qre.global.ignoreCase`
     {
         // 12-hour format
         {

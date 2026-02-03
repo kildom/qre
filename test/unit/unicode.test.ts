@@ -1,6 +1,6 @@
 
 import { describe, expect, test } from 'vitest'
-import cre from '../../src/con-reg-exp';
+import qre from '../../src/qre';
 
 let doUpgraded = true;
 
@@ -15,7 +15,7 @@ describe('Unicode', () => {
     if (doUpgraded) {
 
         test('Upgraded unicode', () => {
-            expect(cre.unicode`[\w--_]`).toStrictEqual(new RegExp('[\\w--_]', 'sv'));
+            expect(qre.unicode`[\w--_]`).toStrictEqual(new RegExp('[\\w--_]', 'sv'));
         });
 
     } else {

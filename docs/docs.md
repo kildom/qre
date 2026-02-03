@@ -2,76 +2,76 @@
 
 ## Installing
 
-You can choose one of two methods to get the Convenient Regular Expressions.
+You can choose one of two methods to get the Quick Regular Expressions.
 They are described below.
 One is with the `npm` and the second one is with the `<script>` tag.
 
 ### Install with `npm`
 
-The package name is `con-reg-exp`, so just run:
+The package name is `qre`, so just run:
 
 ```bash
-npm install con-reg-exp
+npm install qre
 ```
 
 Now, you can import it with the `import` keyword:
 
 ```javascript
-import cre from "con-reg-exp";
+import qre from "qre";
 ```
 
 Alternatively, if you are using CommonJS, you can write:
 
 ```javascript
-const cre = require("con-reg-exp");
+const qre = require("qre");
 ```
 
-The `cre` symbol is available now and you can use it.
+The `qre` symbol is available now and you can use it.
 The package contains also TypeScript definitions for it.
 
 ### Use `<script>` tag
 
-You can make `cre` available globally in your HTML page by using `<script>` tag:
+You can make `qre` available globally in your HTML page by using `<script>` tag:
 
 ```html
-<script type="text/javascript" src="con-reg-exp.min.js"></script>
+<script type="text/javascript" src="qre.min.js"></script>
 ```
 
-You can download the script from the [releases page](https://github.com/kildom/con-reg-exp/releases/).
-You can also download [latest version](https://github.com/kildom/con-reg-exp/releases/latest/download/con-reg-exp.browser.zip) directly.
+You can download the script from the [releases page](https://github.com/kildom/qre/releases/).
+You can also download [latest version](https://github.com/kildom/qre/releases/latest/download/qre.browser.zip) directly.
 
 If you are using TypeScript, the release archive also contains TypeScript definitions.
 You can import them using triple-slash directive:
 
 ```typescript
-/// <reference path="./con-reg-exp.d.ts" />
+/// <reference path="./qre.d.ts" />
 ```
 
 ## Using in the code
 
-The only symbol that the module exports is `cre` (short for "Convenient Regular Expression").
+The only symbol that the module exports is `qre` (short for "Quick Regular Expression").
 Use it in the [tagged templates](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_literals#tagged_templates):
 
 ```javascript
-const myRegExp = cre`... regular expression goes here ...`;
+const myRegExp = qre`... regular expression goes here ...`;
 ```
 
-The `cre` tag function returns a standard [`RegExp`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/RegExp) object.
+The `qre` tag function returns a standard [`RegExp`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/RegExp) object.
 
 > [!CAUTION]
-> The input string for the `cre` tag function must be trusted.
+> The input string for the `qre` tag function must be trusted.
 > Don't pass unescaped user input to it.
 >
 > This also applies to [interpolation](#interpolation) except [string interpolation](#string-interpolation).
 
 # Flags
 
-After the `cre` tag, you can specify one or more flags.
+After the `qre` tag, you can specify one or more flags.
 The flags and tag are separated with a dot `.`.
 For example:
 
 ```javascriptwithcre
-let items = input.split(cre.ignoreCase.unicode`"and"`);
+let items = input.split(qre.ignoreCase.unicode`"and"`);
 ```
 
 Flag name | RegExp<br/>equivalent | Description
@@ -79,13 +79,13 @@ Flag name | RegExp<br/>equivalent | Description
 `indices` | [`d`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/RegExp/hasIndices) | Generate indices.
 `global` | [`g`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/RegExp/global) | Do global search.
 `ignoreCase` | [`i`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/RegExp/ignoreCase) | Case-insensitive.
-`legacy` | opposite of [`u`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/RegExp/unicode) | *CRE* support unicode surrogate pairs by default. This flag brings up old behavior which interprets surrogate pair as two separate characters and also disables `\u{}` and `\p{}`.
+`legacy` | opposite of [`u`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/RegExp/unicode) | *HRE* support unicode surrogate pairs by default. This flag brings up old behavior which interprets surrogate pair as two separate characters and also disables `\u{}` and `\p{}`.
 `unicode` | [`v`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/RegExp/unicodeSets) | Upgraded unicode (v-mode).
 `sticky` | [`y`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/RegExp/sticky) | Sticky search.
-`cache` | | Use *CRE* cache, see below.
+`cache` | | Use *HRE* cache, see below.
 
 You may notice that some RegExp flags are not listed above.
-The `m` and `s` flags are handled automatically by the *CRE* and you don't need to know
+The `m` and `s` flags are handled automatically by the *HRE* and you don't need to know
 about their status.
 
 > [!NOTE]
@@ -95,12 +95,12 @@ about their status.
 ## Cache
 
 The regular expression can be cached, so once it get translated
-into RegExp, the *CRE* will return copy of same object for the same
+into RegExp, the *HRE* will return copy of same object for the same
 input string and interpolated values. It is done using `cache` flag that must be the,
 for example:
 
 ```javascriptwithcre
-let match = input.match(cre.cache`repeat digit`);
+let match = input.match(qre.cache`repeat digit`);
 ```
 
 If high performance is your goal, better solution would be to put the expression
@@ -114,16 +114,16 @@ in a variable just once and reuse it, for example in global `const`.
 # Syntax
 
 > [!NOTE]
-> If you are new to *Convenient Regular Expressions*, look at the [tutorial](tutorial.md) first.
+> If you are new to *Quick Regular Expressions*, look at the [tutorial](tutorial.md) first.
 
 ## Comments
 
-You can use comments inside *CRE*. They are the same as JavaScript's comments,
+You can use comments inside *HRE*. They are the same as JavaScript's comments,
 but you have to remember to escape `` ` `` and `${`
 since you are in tagged template.
 
 ```javascriptwithcre
-let hasMath = cre`
+let hasMath = qre`
     /* The following expression will match
      * a simple math with two integers.
      */
@@ -145,9 +145,9 @@ You have to escape backticks `` ` `` and interpolation begin sequence `${`.
 For example:
 
 ```javascriptwithcre
-let containsWarning = cre.ignoreCase`"warning"`.test(input);
-let numberOfLines = input.match(cre`"\n"`).length + 1;
-let hasBacktick = cre`"\`"`.test(input);
+let containsWarning = qre.ignoreCase`"warning"`.test(input);
+let numberOfLines = input.match(qre`"\n"`).length + 1;
+let hasBacktick = qre`"\`"`.test(input);
 ```
 
 ### String literal alias
@@ -168,21 +168,21 @@ Value   | Aliases
 
 Character class matches one character in set of characters.
 
-Character class in *CRE* works the same as
+Character class in *HRE* works the same as
 [RegExp character class](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Regular_expressions/Character_class) with one exception.
 You have to escape backticks `` ` `` and interpolation begin sequence `${`.
 
 For example:
 
 ```javascriptwithcre
-let isNotHexString = cre`[^0-9a-fA-F]`.test(input);
+let isNotHexString = qre`[^0-9a-fA-F]`.test(input);
 ```
 
 Complement of character class can also be expressed using `not` keyword.
 The example above can be rewritten as follows:
 
 ```javascriptwithcre
-let isNotHexString = cre`not [0-9a-fA-F]`.test(input);
+let isNotHexString = qre`not [0-9a-fA-F]`.test(input);
 ```
 
 ### Character class keyword
@@ -199,13 +199,13 @@ Keyword | RegExp equivalent | Complement RegExp | Description | Aliases
 `line‑terminator` | `[\r\n\u2028\u2029]` | `.` without `s` flag | Character that terminates the line | `line‑term` `terminator` `term`
 
 ```javascriptwithcre
-let hasDigit = cre`digit`.test(input);
+let hasDigit = qre`digit`.test(input);
 ```
 
 Character class keyword can also be complemented with the `not` operator:
 
 ```javascriptwithcre
-let onlyDigits = input.replace(cre.global`not digit`, '');
+let onlyDigits = input.replace(qre.global`not digit`, '');
 ```
 
 ### Unicode Property
@@ -213,7 +213,7 @@ let onlyDigits = input.replace(cre.global`not digit`, '');
 Character class that matches specific unicode property uses `property` (alias `prop`) keyword followed by actual property enclosed in `< >`.
 
 ```javascriptwithcre
-let hasNonEnglishLetters = cre`lookahead not [A-Z], prop<Letter>`.test(input);
+let hasNonEnglishLetters = qre`lookahead not [A-Z], prop<Letter>`.test(input);
 ```
 
 You can also specify unicode properties in character class `[\p{...}]`.
@@ -230,7 +230,7 @@ Those are equivalents of `?`, `*`, `+`, `{n,m}` in RegExp notation.
 For example:
 
 ```javascriptwithcre
-let numberLessThan100 = cre`optional [1-9], digit`;
+let numberLessThan100 = qre`optional [1-9], digit`;
 ```
 
 Quantifier is a keyword with flexible syntax. Some parts of it are optional,
@@ -253,7 +253,7 @@ It will make the quantifier lazy (non-greedy) which is equivalent of adding `?` 
 For example:
 
 ```javascriptwithcre
-let matchQuotedText = cre`["], lazy-repeat any, ["]`;
+let matchQuotedText = qre`["], lazy-repeat any, ["]`;
 ```
 
 ## Flow and grouping
@@ -266,7 +266,7 @@ Literals, character classes, and also other nodes described below can be
 separated by comma or semicolon (`,` or `;`) to provide sequence of matches. For example:
 
 ```javascriptwithcre
-let hasGrayInAnyForm = cre`"gr", [ae], "y"`.test(input);
+let hasGrayInAnyForm = qre`"gr", [ae], "y"`.test(input);
 ```
 
 The comma and semicolon have the same meaning, but for better readability:
@@ -274,13 +274,13 @@ The comma and semicolon have the same meaning, but for better readability:
 * use comma to separate expressions in a single line, for example:
 
     ```javascriptwithcre
-    let matchNumber = cre`optional [+-], at-least-1 digit`;
+    let matchNumber = qre`optional [+-], at-least-1 digit`;
     ```
 
 * use semicolon to separate expressions between lines by placing it at the end of a line, for example:
 
     ```javascriptwithcre
-    let matchNumber = cre`
+    let matchNumber = qre`
         optional [+-];
         at-least-1 digit;
     `;
@@ -290,7 +290,7 @@ Empty expression between separators are ignored.
 Separator after closing bracket or parenthesis is optional, for example:
 
 ```javascriptwithcre
-let addressWithUserName = cre`
+let addressWithUserName = qre`
     optional {
         lazy-repeat any;
         "@"; // here we have an empty expression which will be ignored
@@ -308,7 +308,7 @@ Multiple `or`s can be used to make an alternative of more expressions.
 The same example as above, but using `or`:
 
 ```javascriptwithcre
-let hasGrayInAnyForm = cre`"gray" or "grey"`.test(input);
+let hasGrayInAnyForm = qre`"gray" or "grey"`.test(input);
 ```
 
 All prefix (unary) operators have higher precedence, so `or` operator is applied after all
@@ -317,9 +317,9 @@ the parentheses for better readability. For example:
 
 ```javascriptwithcre
 // This is more readable:
-let pattern = cre`(other: lazy-repeat not digit) or (optional digit)`;
+let pattern = qre`(other: lazy-repeat not digit) or (optional digit)`;
 // than that:
-let pattern = cre`other: lazy-repeat not digit or optional digit`;
+let pattern = qre`other: lazy-repeat not digit or optional digit`;
 // but both generates exactly the same result.
 ```
 
@@ -335,13 +335,13 @@ but for clarity, you should use `( )` to group nodes in single line, and
 The same example as above, but with parentheses `( )`:
 
 ```javascriptwithcre
-let hasDarkGrayInAnyForm = cre`(optional "dark ", "gray") or (optional "dark ", "grey")`.test(input);
+let hasDarkGrayInAnyForm = qre`(optional "dark ", "gray") or (optional "dark ", "grey")`.test(input);
 ```
 
 Or, multi-line variant:
 
 ```javascriptwithcre
-let hasDarkGrayInAnyForm = cre`
+let hasDarkGrayInAnyForm = qre`
     {
         optional "dark ", "gray";
     } or {
@@ -378,13 +378,13 @@ Keyword | RegExp equivalent | Description | Aliases
 For example:
 
 ```javascriptwithcre
-let isJPEG = cre.ignoreCase`(".jpeg" or ".jpg"), end-of-text`.test(fileName);
+let isJPEG = qre.ignoreCase`(".jpeg" or ".jpg"), end-of-text`.test(fileName);
 ```
 
 Boundary assertion can be complemented with the `not` operator, for example:
 
 ```javascriptwithcre
-let tabInTheMiddleOfLine = cre`not begin-of-line, "\t"`.test(fileName);
+let tabInTheMiddleOfLine = qre`not begin-of-line, "\t"`.test(fileName);
 ```
 
 ### Look assertion
@@ -408,7 +408,7 @@ The named capturing group looks similar to the labels in JavaScript.
 It is a name with colon at the end `name:`.
 
 ```javascriptwithcre
-let match = input.match(cre`
+let match = input.match(qre`
     user: at-least-1 [a-zA-Z_.-];
     "@";
     address: at-least-1 [a-zA-Z_.-];
@@ -426,7 +426,7 @@ The capturing group counts from `1`.
 It counts up for every capturing group (both named and positional) as in classic RegExp patterns.
 
 ```javascriptwithcre
-let match = input.match(cre`
+let match = input.match(qre`
     1: at-least-1 [a-zA-Z_.-];
     "@";
     2: at-least-1 [a-zA-Z_.-];
@@ -442,7 +442,7 @@ capturing group name or number enclosed by `< >`.
 
 
 ```javascriptwithcre
-let hasRepeatingWords = cre`
+let hasRepeatingWords = qre`
     firstWord: at-least-1 word-char;
     at-least-1 not word-char;
     match<firstWord>;
@@ -451,17 +451,17 @@ let hasRepeatingWords = cre`
 
 ## Interpolation
 
-Other values and expressions can be added to the *CRE* using interpolation.
+Other values and expressions can be added to the *HRE* using interpolation.
 There are tree kinds of interpolations: string interpolation, character class interpolation, expression interpolation.
 
 ### String interpolation
 
 You can place arbitrary string into the string literal. You don't need to
-escape it before using, the *CRE* will handle that for you.
+escape it before using, the *HRE* will handle that for you.
 
 ```javascriptwithcre
 function hasVerbInAnyForm(text, verb) {
-    return cre.ignoreCase`
+    return qre.ignoreCase`
         word-boundary;
         "${verb}" or "${verb}s" or "${verb}es";
         word-boundary;
@@ -469,14 +469,14 @@ function hasVerbInAnyForm(text, verb) {
 }
 ```
 
-If the interpolated value is *CRE*, error will be thrown.
+If the interpolated value is *HRE*, error will be thrown.
 If it is not a string, it will be converted to string.
 
 ### Character class interpolation
 
 You can place arbitrary string into the character class.
 Each character from the string will be added to matching set of that class.
-You don't need to escape it before using, the *CRE* will handle that for you.
+You don't need to escape it before using, the *HRE* will handle that for you.
 
 Characters from interpolated value are added with escaping,
 so value `a-f` will be interpreted as `a\-f`. If this is not your intention,
@@ -485,7 +485,7 @@ you must specify each character in the interpolated string - `abcdef`.
 ```javascriptwithcre
 function isInteger(text, isHex) {
     const additionalCharacters = isHex ? "abcdef" : "";
-    return cre.ignoreCase`
+    return qre.ignoreCase`
         start-of-text;
         at-least-1 [0-9${additionalCharacters}];
         end-of-text;
@@ -493,16 +493,16 @@ function isInteger(text, isHex) {
 }
 ```
 
-If the interpolated value is *CRE*, error will be thrown.
+If the interpolated value is *HRE*, error will be thrown.
 If it is not a string, it will be converted to string.
 
 ### Expression interpolation
 
-You can reuse *CRE* expression in another expression.
-The input expression must be a *CRE* expression created with the `cre` tag or a string.
-There is a slide difference between interpolating *CRE* expression and a string:
+You can reuse *HRE* expression in another expression.
+The input expression must be a *HRE* expression created with the `qre` tag or a string.
+There is a slide difference between interpolating *HRE* expression and a string:
 
-* Interpolated *CRE* expression becomes an atom, so, for example, adding `repeat`
+* Interpolated *HRE* expression becomes an atom, so, for example, adding `repeat`
   quantifier will affect entire interpolated expression.
   The `ignoreCase`, `unicode` and `legacy` flags must be the same in both
   expressions. JavaScript does not allow to change RegExp flags in the middle of
@@ -512,7 +512,7 @@ There is a slide difference between interpolating *CRE* expression and a string:
   the interpolated expression.
 
 ```javascriptwithcre
-const number = cre`
+const number = qre`
     optional [+-];                   // Sign
     {
         at-least-1 digit;            // Integral part
@@ -528,10 +528,10 @@ const number = cre`
     }
 `;
 
-const ws = cre`repeat whitespace`;
+const ws = qre`repeat whitespace`;
 
 function validateJSONArrayOfNumbers(text) {
-    return cre.cache`
+    return qre.cache`
         begin-of-text, ${ws};  // Trim leading whitespaces
         "[", ${ws};            // Begin of array
         optional {             // Array can be empty
@@ -547,14 +547,14 @@ function validateJSONArrayOfNumbers(text) {
 }
 ```
 
-If it is possible, try to interpolate *CRE* expression instead of strings.
-Use string only when interpolated expression is not a full *CRE* expression.
+If it is possible, try to interpolate *HRE* expression instead of strings.
+Use string only when interpolated expression is not a full *HRE* expression.
 
 For example:
 ```javascriptwithcre
 function validateWord(text, allowEmpty) {
     let quantifier = allowEmpty ? 'repeat' : 'at-least-1';
-    return cre.cache`
+    return qre.cache`
         begin-of-text;
         ${quantifier} word-character;
         end-of-text;

@@ -1,10 +1,10 @@
 // Match JSON array of numbers
 
-import cre from 'con-reg-exp';
+import qre from 'qre';
 
-// Convenient Regular Expression
+// Quick Regular Expression
 
-const number = cre`
+const number = qre`
     optional "-";               // Sign
     {                           // Integral part
         "0";                    // Zero is special case
@@ -22,9 +22,9 @@ const number = cre`
     }
 `;
 
-const ws = cre`repeat whitespace`;
+const ws = qre`repeat whitespace`;
 
-const arrayOfNumbers = cre`
+const arrayOfNumbers = qre`
     begin-of-text, ${ws};      // Trim leading whitespaces
     "[", ${ws};                // Begin of array
     optional {                 // Optional, because array can be empty

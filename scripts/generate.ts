@@ -16,13 +16,13 @@
  * DEALINGS IN THE SOFTWARE.
 */
 
-import cre from '../src/con-reg-exp';
+import qre from '../src/qre';
 
 console.log('\n');
 
-const whitespaceWithoutNewLine = cre.legacy`[\r\t\v\f \xA0\uFEFF]`;
+const whitespaceWithoutNewLine = qre.legacy`[\r\t\v\f \xA0\uFEFF]`;
 
-console.log(`const tokenRegExpBase = ${cre.sticky.legacy`
+console.log(`const tokenRegExpBase = ${qre.sticky.legacy`
 repeat ${whitespaceWithoutNewLine};
 {
     begin: [{(];
@@ -71,7 +71,7 @@ repeat ${whitespaceWithoutNewLine};
 repeat ${whitespaceWithoutNewLine};
 `};\n`);
 
-console.log(`const tokenRegExpVMode = ${cre.sticky.legacy`
+console.log(`const tokenRegExpVMode = ${qre.sticky.legacy`
 repeat ${whitespaceWithoutNewLine};
 {
     begin: [{(];
@@ -119,7 +119,7 @@ repeat ${whitespaceWithoutNewLine};
 `};\n`);
 
 
-console.log(`const quantifierRegExp = ${cre`
+console.log(`const quantifierRegExp = ${qre`
 begin-of-text;
 optional lazy: ("lazy-" or "non-greedy-");
 {

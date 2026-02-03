@@ -1,9 +1,9 @@
 // Match IPv4 address
 
-import cre from 'con-reg-exp';
+import qre from 'qre';
 
-// Convenient Regular Expression
-const ipv4number = cre`
+// Quick Regular Expression
+const ipv4number = qre`
     {
         "25", [0-5];           // Range 250…255
     } or {
@@ -15,7 +15,7 @@ const ipv4number = cre`
     }
 `;
 
-const ipv4address = cre.global`
+const ipv4address = qre.global`
     // Disallow anything behind that reassembles IPv4 addresses
     lookbehind not (digit or ".");
     // Four numbers separated by dot

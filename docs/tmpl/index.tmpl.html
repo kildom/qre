@@ -1,9 +1,10 @@
 <html>
 <head>
-    <title>Convenient Regular Expressions</title>
+    <title>Quick Regular Expressions</title>
+    <meta charset="utf-8">
     <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
-    <script src="con-reg-exp.min.js"></script>
+    <script src="qre.min.js"></script>
     <script src="docs.js"></script>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
@@ -31,13 +32,13 @@
                     <% for (sample of samples) { %>
                     <div class="swiper-slide">
                         <div class="sample">
-                            <a href="<%- sample.demoURL %>" target="cre-web-demo" class="try-it-button">▶&nbsp;&nbsp;Try it</a>
+                            <a href="<%- sample.demoURL %>" target="qre-web-demo" class="try-it-button">▶&nbsp;&nbsp;Try it</a>
                             <pre class="sample-title language-javascriptwithcre"><%= removeTopLevelTag(sample.title) %></pre>
                             <div class="sample-part">Classic</div>
                             <pre
                                 class="sample-code language-javascriptwithcre"><%= removeTopLevelTag(sample.regexp) %></pre>
 
-                            <div class="sample-part">Convenient Regular Expressions</div>
+                            <div class="sample-part">Quick Regular Expressions</div>
                             <pre class="sample-code language-javascriptwithcre"><%= removeTopLevelTag(sample.code) %></pre>
                         </div>
                     </div>

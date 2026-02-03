@@ -2,11 +2,11 @@
 * [<span><span class="material-symbols-outlined">rocket</span></span>Get started](#get-started)
 * [<span><span class="material-symbols-outlined">school</span></span>Tutorial](tutorial.html)
 * [<span><span class="material-symbols-outlined">menu_book</span></span>Docs](docs.html)
-* <a href="https://kildom.github.io/cre-web-demo/" target="cre-web-demo"><span><span class="material-symbols-outlined">lightbulb</span></span>Demo</a>
-* [<img src="npm.svg">npm](https://www.npmjs.com/package/con-reg-exp)
-* [<img src="github-mark.svg">GitHub](https://github.com/kildom/con-reg-exp/)
+* <a href="https://kildom.github.io/qre-web-demo/" target="qre-web-demo"><span><span class="material-symbols-outlined">lightbulb</span></span>Demo</a>
+* [<img src="npm.svg">npm](https://www.npmjs.com/package/qre)
+* [<img src="github-mark.svg">GitHub](https://github.com/kildom/qre/)
 
-# Convenient Regular Expressions
+# Quick Regular Expressions
 
 * improve your RegExp.
 * organize your RegExp.
@@ -16,19 +16,19 @@
 * reuse your RegExp.
 * improve your RegExp.
 
-## What are Convenient Regular Expressions?
+## What are Quick Regular Expressions?
 
 ### Regular expression syntax redefined
 
-The "Convenient Regular Expressions" give an alternative syntax for regular expressions.
+The "Quick Regular Expressions" give an alternative syntax for regular expressions.
 The main goal is to introduce a syntax that is easily manageable in complex regular expressions.
 
 ### Under the hood
 
 The module is still using a standard JavaScript's [`RegExp`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/RegExp) object.
-Essentially, it is a runtime transpiler that converts "Convenient Regular Expression" into a classic regular expression.
+Essentially, it is a runtime transpiler that converts "Quick Regular Expression" into a classic regular expression.
 
-## Why Convenient Regular Expressions?
+## Why Quick Regular Expressions?
 
 ### You can use whitespaces
 
@@ -66,36 +66,36 @@ Long and complex regular expressions look like some esoteric programming languag
 ### Install
 
 ```bash
-npm install con-reg-exp
+npm install qre
 ```
 
-Or, if you prefer to [download](https://github.com/kildom/con-reg-exp/releases/latest/download/con-reg-exp-browser.zip)
+Or, if you prefer to [download](https://github.com/kildom/qre/releases/latest/download/qre-browser.zip)
 and use in an HTML tag:
 
 ```html
-<script src="con-reg-exp.min.js"></script>
+<script src="qre.min.js"></script>
 ```
 
 ### Import module
 
 ```javascriptwithcre
-import cre from "con-reg-exp";
+import qre from "qre";
 ```
 
 Or, if you are using CommonJS:
 
 ```javascriptwithcre
-const cre = require("con-reg-exp");
+const qre = require("qre");
 ```
 
-If you are using an HTML tag, the `cre` symbol is globally available and you don't need to import anything.
+If you are using an HTML tag, the `qre` symbol is globally available and you don't need to import anything.
 
-### Write your first Convenient Regular Expression
+### Write your first Quick Regular Expression
 
 ```javascriptwithcre
 const inputText = "Hello World!!!";
 
-const pattern = cre.global`
+const pattern = qre.global`
     at-least-1 word-char
 `;
 
@@ -110,7 +110,7 @@ console.log(words);
 
 * [Learn details from the **documentation**](docs.html)
 
-* <a href="https://kildom.github.io/cre-web-demo/" target="cre-web-demo">Experiment with <b>web demo</b></a>
+* <a href="https://kildom.github.io/qre-web-demo/" target="qre-web-demo">Experiment with <b>web demo</b></a>
 
 <!--
 Copyright © 2024

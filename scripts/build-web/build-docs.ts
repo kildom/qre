@@ -2,7 +2,7 @@
 import * as fs from 'node:fs';
 
 import { template } from 'underscore';
-import cre from '../../src/con-reg-exp';
+import qre from '../../src/qre';
 import { DOCS_DIR, TMPL_DIR, WEB_DIR } from './config';
 import { convertMarkdownFile } from './markdown';
 
@@ -28,7 +28,7 @@ export function buildDocs() {
     for (let file of markdownFiles) {
         let html = convertMarkdownFile(file, false);
         let menu = convertMarkdownFile('_menu.md', false);
-        let all = html.matchAll(cre.global.cache`
+        let all = html.matchAll(qre.global.cache`
             "<h", level: digit;
             lazy-repeat any;
             "id=", ["], id: lazy-repeat any, ["];

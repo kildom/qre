@@ -1,21 +1,21 @@
 
 import { describe, expect, test } from 'vitest'
-import cre from '../../src/con-reg-exp';
+import qre from '../../src/qre';
 
 
 describe('Separators', () => {
 
     test('Missing', () => {
 
-        expect(() => cre`"abc" "abc"`).toThrow();
-        expect(() => cre`repeat("abc") "abc"`).toThrow();
-        expect(() => cre`"abc" ("abc" or "def")`).toThrow();
+        expect(() => qre`"abc" "abc"`).toThrow();
+        expect(() => qre`repeat("abc") "abc"`).toThrow();
+        expect(() => qre`"abc" ("abc" or "def")`).toThrow();
 
     });
 
     test('Optional', () => {
 
-        expect(cre`
+        expect(qre`
             "abc"
             1: "def"
             2: "ghi";
@@ -26,19 +26,19 @@ describe('Separators', () => {
     });
 
     test('Interpolation', () => {// TODO: Remove new line tokens at the end and beginning of interpolated tokens
-        let inner = cre`
+        let inner = qre`
             "def"
         `;
-        let inner2 = cre`
+        let inner2 = qre`
             ${inner}
         `;
-        expect(() => cre`"abc" ${inner} "ghi"`).toThrow();
-        expect(() => cre`"abc" ${inner}`).toThrow();
-        expect(() => cre`${inner} "ghi"`).toThrow();
-        expect(() => cre`"abc" ${inner2} "ghi"`).toThrow();
-        expect(() => cre`"abc" ${inner2}`).toThrow();
-        expect(() => cre`${inner2} "ghi"`).toThrow();
-        expect(cre`
+        expect(() => qre`"abc" ${inner} "ghi"`).toThrow();
+        expect(() => qre`"abc" ${inner}`).toThrow();
+        expect(() => qre`${inner} "ghi"`).toThrow();
+        expect(() => qre`"abc" ${inner2} "ghi"`).toThrow();
+        expect(() => qre`"abc" ${inner2}`).toThrow();
+        expect(() => qre`${inner2} "ghi"`).toThrow();
+        expect(qre`
             ${inner}
             1: ${inner2}
             2: ${inner};

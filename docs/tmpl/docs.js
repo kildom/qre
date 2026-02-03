@@ -89,7 +89,7 @@ async function editPage() {
         div.innerHTML = `
         <div style="background-color: white; padding: 5px;">
             <a href="javascript://" onclick="copyDiff()">Copy to clipboard</a> |
-            <a href="https://github.com/kildom/con-reg-exp/discussions/categories/documentation" target="_blank">Where to send</a>
+            <a href="https://github.com/kildom/qre/discussions/categories/documentation" target="_blank">Where to send</a>
         </div>
         `;
         document.body.appendChild(div);

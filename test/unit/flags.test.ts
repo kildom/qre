@@ -1,11 +1,11 @@
 
 import { describe, expect, test } from 'vitest'
-import cre from '../../src/con-reg-exp';
+import qre from '../../src/qre';
 
 
 describe('Flags', () => {
     test('Invalid', () => {
-        expect(() => cre.ignorecase`"abc"`).toThrow();
-        expect(() => cre.sticky.ignorecase`"abc"`).toThrow();
+        expect(() => qre.ignorecase`"abc"`).toThrow();
+        expect(() => qre.sticky.ignorecase`"abc"`).toThrow();
     });
 });

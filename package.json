@@ -1,14 +1,14 @@
 {
-  "name": "con-reg-exp",
-  "version": "0.2.4",
-  "description": "Convenient Regular Expressions - a different approach to the regular expressions syntax.",
-  "main": "./dist/cjs/con-reg-exp.cjs",
-  "module": "./dist/esm/con-reg-exp.mjs",
-  "types": "./dist/cjs/con-reg-exp.d.ts",
+  "name": "qre",
+  "version": "0.2.6",
+  "description": "Quick Regular Expressions - a different approach to the regular expressions syntax.",
+  "main": "./dist/cjs/qre.cjs",
+  "module": "./dist/esm/qre.mjs",
+  "types": "./dist/cjs/qre.d.ts",
   "exports": {
-    "types": "./dist/cjs/con-reg-exp.d.ts",
-    "require": "./dist/cjs/con-reg-exp.cjs",
-    "import": "./dist/esm/con-reg-exp.mjs"
+    "types": "./dist/cjs/qre.d.ts",
+    "require": "./dist/cjs/qre.cjs",
+    "import": "./dist/esm/qre.mjs"
   },
   "directories": {
     "doc": "docs",
@@ -30,7 +30,7 @@
     "webpack-cli": "^5.1.4"
   },
   "scripts": {
-    "prebuild": "npx esbuild --target=chrome62,edge79,firefox53,safari11 --bundle --global-name=GtEa1M6 --sourcemap=linked --minify src/con-reg-exp.ts --outfile=dist/browser/con-reg-exp.min.js && npx esbuild --target=chrome62,edge79,firefox53,safari11 --bundle --global-name=GtEa1M6 --sourcemap=linked src/con-reg-exp.ts --outfile=dist/browser/con-reg-exp.js",
+    "prebuild": "npx esbuild --target=chrome62,edge79,firefox53,safari11 --bundle --global-name=GtEa1M6 --sourcemap=linked --minify src/qre.ts --outfile=dist/browser/qre.min.js && npx esbuild --target=chrome62,edge79,firefox53,safari11 --bundle --global-name=GtEa1M6 --sourcemap=linked src/qre.ts --outfile=dist/browser/qre.js",
     "build": "npx tsc -b ./tsconfig.cjs.json ./tsconfig.esm.json",
     "postbuild": "npx ts-node --swc scripts/postbuild.ts",
     "build-web": "npx tsx scripts/build-web/build.ts",
@@ -40,7 +40,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/kildom/con-reg-exp.git"
+    "url": "git+https://github.com/kildom/qre.git"
   },
   "keywords": [
     "regex"
@@ -48,7 +48,7 @@
   "author": "Dominik Kilian",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/kildom/con-reg-exp/issues"
+    "url": "https://github.com/kildom/qre/issues"
   },
-  "homepage": "https://kildom.github.io/con-reg-exp/"
+  "homepage": "https://kildom.github.io/qre/"
 }

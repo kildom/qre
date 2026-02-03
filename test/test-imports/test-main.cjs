@@ -1,13 +1,13 @@
 
-const cre = require('con-reg-exp');
+const qre = require('qre');
 
-console.log(cre.legacy`"OK"`);
+console.log(qre.legacy`"OK"`);
 
 try {
-    console.log(cre.legacy`error`);
+    console.log(qre.legacy`error`);
     throw new Error('Unreachable');
 } catch (err) {
-    if (!(err instanceof cre.Error)) {
+    if (!(err instanceof qre.Error)) {
         throw err;
     }
 }

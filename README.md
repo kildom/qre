@@ -1,9 +1,9 @@
-# Convenient Regular Expressions
+# Quick Regular Expressions
 
-〚 [Web Page](https://kildom.github.io/con-reg-exp/) 〛&nbsp;
-〚 [Tutorial](https://kildom.github.io/con-reg-exp/tutorial.html) 〛&nbsp;
-〚 [Docs](https://kildom.github.io/con-reg-exp/docs.html) 〛&nbsp;
-〚 [Web Demo](https://kildom.github.io/cre-web-demo/) 〛&nbsp;
+〚 [Web Page](https://kildom.github.io/qre/) 〛&nbsp;
+〚 [Tutorial](https://kildom.github.io/qre/tutorial.html) 〛&nbsp;
+〚 [Docs](https://kildom.github.io/qre/docs.html) 〛&nbsp;
+〚 [Web Demo](https://kildom.github.io/qre-web-demo/) 〛&nbsp;
 
 > [!WARNING]
 > This is a project in an early stage of development.
@@ -12,35 +12,35 @@
 
 ## Regular expression syntax redefined
 
-The "Convenient Regular Expressions" give an alternative syntax for regular expressions.
+The "Quick Regular Expressions" give an alternative syntax for regular expressions.
 The main goal is to introduce a syntax that is easily manageable in complex regular expressions.
 
 The module is still using a standard JavaScript's [`RegExp`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/RegExp) object.
-Essentially, it is a runtime transpiler that converts "Convenient Regular Expression" into a classic regular expression.
+Essentially, it is a runtime transpiler that converts "Quick Regular Expression" into a classic regular expression.
 
 ## Usage
 
 1. Install with `npm`:
 
     ```
-    npm install con-reg-exp
+    npm install qre
     ```
 
 2. Import it:
 
     ```javascript
-    import cre from "con-reg-exp";
+    import qre from "qre";
     ```
 
 3. Use it as a tagged template:
 
     ```javascript
-    const myRegExp = cre`"Write your expression here."`;
+    const myRegExp = qre`"Write your expression here."`;
     ```
 
-You can find more details on usage in [the documentation](https://kildom.github.io/con-reg-exp/docs.html).
+You can find more details on usage in [the documentation](https://kildom.github.io/qre/docs.html).
 
-If you want to start using it, go to the [tutorial](https://kildom.github.io/con-reg-exp/tutorial.html).
+If you want to start using it, go to the [tutorial](https://kildom.github.io/qre/tutorial.html).
 
 ## Benefits
 
@@ -90,12 +90,12 @@ function guessWhatDoesThisFunctionDo(text) {
 }
 ```
 
-Convenient Regular Expressions:
+Quick Regular Expressions:
 
 ```javascript
-import cre from "con-reg-exp";
+import qre from "qre";
 
-const number = cre`
+const number = qre`
     optional "-";               // Sign
     {                           // Integral part
         "0";                    // Zero is special case
@@ -113,9 +113,9 @@ const number = cre`
     }
 `;
 
-const ws = cre`repeat whitespace`;
+const ws = qre`repeat whitespace`;
 
-const pattern = cre`
+const pattern = qre`
     begin-of-text, ${ws};      // Trim leading whitespaces
     "[", ${ws};                // Begin of array
     optional {                 // Optional, because array can be empty
@@ -135,9 +135,9 @@ function guessWhatDoesThisFunctionDo(text) {
 ```
 
 Which one was easier to understand? I'm assuming that you don't know
-the convenient regular expressions [syntax](https://kildom.github.io/con-reg-exp/docs.html#syntax) yet. Were you able to guess
+the Quick Regular Expressions [syntax](https://kildom.github.io/qre/docs.html#syntax) yet. Were you able to guess
 despite this?
 
-Click the link to see [the answer](https://kildom.github.io/cre-web-demo/#1nVZRa9swEN6zf4UQAxOqGNt52sr2sOGHwVgf1r1MNsxN1NSjVoqVpnQl/33fSZYtp1lGa0iwpbvvdPfdnU7ft3O4UT8m7W/zBklkC5tRI2B2nfIdQleqM1F0OhOiCPoo+p3SjdJbahsIR8fQOzplDMISRa4cHWCfERHl+MAsn/Pz5zX+HUli5Z5O94Iv6DjrDjDoXFurQA9Pn2F6hZ+q27DGgCi1bKBHJW71XEUOEDKbv6uET5ieSgdR7FT3iFrXa1ZfbXaK/QGmw5i6duTsUL/w29fg3b1ND5/w8+EjyFR3hlfYAVcbTfxMzEhVVKOdAUuezYPlf5n/Be4dsw+mZ7WP1Jjgo4zNq4vrby6rwiyYlLVAgj6Yfc8cPLjsmpbB/opCPQIbq8olnypMnP9EwJTK1vb/whVES+BMy/oe3dpVw7LWWGGqvds6GHp6Xw+BAON9xCVyg0uiblDUa4b7sK0HbXrePrmS2HsfJrtcDL4N647zo7qD9a+gytfaTW3QyQLTDoBXp8JWoHNMghY2Wss6hH4Y9EDHrb9448/uxl+9h8FjlMfiYGkcB2YzwNJdber27lZdwhTliLT2Y5mJXCyqWLhPJlnGBMvxW7CK+eVSy1JnotS5KLtSL0pd4d7sN2WaZIKlSU5/I5TMFJYzdUb/SZoW9ALRYp6NMoE0zjH94gs+LiSBUpaE7zCQ0zfKKrIDB/lKAaVIBz5jBLA6NJwcxooGKFKZeSE7nQQEHAxyVlaw+MNHBN7uucnOYfRV3A8lL8PDILSrb5tV7FGiffQX).
+Click the link to see [the answer](https://kildom.github.io/qre-web-demo/#1nVZRa9swEN6zf4UQAxOqGNt52sr2sOGHwVgf1r1MNsxN1NSjVoqVpnQl/33fSZYtp1lGa0iwpbvvdPfdnU7ft3O4UT8m7W/zBklkC5tRI2B2nfIdQleqM1F0OhOiCPoo+p3SjdJbahsIR8fQOzplDMISRa4cHWCfERHl+MAsn/Pz5zX+HUli5Z5O94Iv6DjrDjDoXFurQA9Pn2F6hZ+q27DGgCi1bKBHJW71XEUOEDKbv6uET5ieSgdR7FT3iFrXa1ZfbXaK/QGmw5i6duTsUL/w29fg3b1ND5/w8+EjyFR3hlfYAVcbTfxMzEhVVKOdAUuezYPlf5n/Be4dsw+mZ7WP1Jjgo4zNq4vrby6rwiyYlLVAgj6Yfc8cPLjsmpbB/opCPQIbq8olnypMnP9EwJTK1vb/whVES+BMy/oe3dpVw7LWWGGqvds6GHp6Xw+BAON9xCVyg0uiblDUa4b7sK0HbXrePrmS2HsfJrtcDL4N647zo7qD9a+gytfaTW3QyQLTDoBXp8JWoHNMghY2Wss6hH4Y9EDHrb9448/uxl+9h8FjlMfiYGkcB2YzwNJdber27lZdwhTliLT2Y5mJXCyqWLhPJlnGBMvxW7CK+eVSy1JnotS5KLtSL0pd4d7sN2WaZIKlSU5/I5TMFJYzdUb/SZoW9ALRYp6NMoE0zjH94gs+LiSBUpaE7zCQ0zfKKrIDB/lKAaVIBz5jBLA6NJwcxooGKFKZeSE7nQQEHAxyVlaw+MNHBN7uucnOYfRV3A8lL8PDILSrb5tV7FGiffQX).
 
 Imagine that you want to modify the function to allow strings in the array.

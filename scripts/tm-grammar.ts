@@ -16,13 +16,13 @@
  * DEALINGS IN THE SOFTWARE.
 */
 
-import cre from '../src/con-reg-exp';
+import qre from '../src/qre';
 
 let grammar = {
-    "scopeName": "source.cre",
+    "scopeName": "source.qre",
     "patterns": [
         {
-            "begin": "(cre)((?:\\.[a-zA-Z]+)*)`",
+            "begin": "(qre)((?:\\.[a-zA-Z]+)*)`",
             "end": "`",
             "beginCaptures": {
                 "1": {
@@ -43,7 +43,7 @@ let grammar = {
                     "name": "invalid.illegal",
                 },
                 {
-                    "include": "#cre"
+                    "include": "#qre"
                 }
             ]
         }
@@ -63,17 +63,17 @@ let grammar = {
                 }
             ]
         },
-        "cre": {
+        "qre": {
             "patterns": [
                 {
                     "include": "#comment"
                 },
                 {
-                    "match": cre`([a-zA-Z_], repeat [a-zA-Z0-9_]), ":"`,
+                    "match": qre`([a-zA-Z_], repeat [a-zA-Z0-9_]), ":"`,
                     "name": "entity.name.function",
                 },
                 {
-                    "match": cre.ignoreCase`
+                    "match": qre.ignoreCase`
                         word-boundary;
                         "match" or "not" or "or" or {
                             optional ("lazy-" or "non-greedy-");
@@ -99,11 +99,11 @@ let grammar = {
                     "name": "storage.type"
                 },
                 {
-                    "match": cre`["], lazy-repeat (("\\", any) or any), ["] `,
+                    "match": qre`["], lazy-repeat (("\\", any) or any), ["] `,
                     "name": "string.quoted.double"
                 },
                 {
-                    "match": cre.ignoreCase`
+                    "match": qre.ignoreCase`
                         word-boundary;
                         {
                             "end" or "start" or "begin";
@@ -121,7 +121,7 @@ let grammar = {
                     "name": "keyword.control"
                 },
                 {
-                    "match": cre.ignoreCase`
+                    "match": qre.ignoreCase`
                         {
                             word-boundary;
                             "any"
@@ -151,15 +151,15 @@ let grammar = {
                     "name": "support.class"
                 },
                 {
-                    "match": cre`"[", lazy-repeat (("\\" any) or any), "]"`,
+                    "match": qre`"[", lazy-repeat (("\\" any) or any), "]"`,
                     "name": "string.other"
                 },
                 {
-                    "match": cre`"<", lazy-repeat any, ">"`,
+                    "match": qre`"<", lazy-repeat any, ">"`,
                     "name": "entity.name.function",
                 },
                 {
-                    "match": cre`"\${", lazy-repeat any, "}"`,
+                    "match": qre`"\${", lazy-repeat any, "}"`,
                     "name": "string.regexp",
                 }
             ]

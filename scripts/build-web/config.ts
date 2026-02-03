@@ -10,7 +10,7 @@ export const COPY_FILES = {
     'docs/tmpl/github-mark.svg': 'web/github-mark.svg',
     'docs/tmpl/docs.css': 'web/docs.css',
     'docs/tmpl/docs.js': 'web/docs.js',
-    'dist/browser/con-reg-exp.min.js': 'web/con-reg-exp.min.js',
+    'dist/browser/qre.min.js': 'web/qre.min.js',
 };
 
 

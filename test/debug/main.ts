@@ -1,11 +1,11 @@
 
 
-import cre from '../../src/con-reg-exp';
+import qre from '../../src/qre';
 
-let inner = cre`
+let inner = qre`
     "def"
 `;
-let inner2 = cre`
+let inner2 = qre`
     ${inner}
 `;
 

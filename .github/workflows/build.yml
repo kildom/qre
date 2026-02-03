@@ -49,14 +49,14 @@ jobs:
         echo RELEASE_TAG=v`node scripts/show-version.mjs` >> "$GITHUB_ENV"
         sudo apt-get install zip
         cd dist/browser
-        zip -r ../../con-reg-exp-browser.zip *
+        zip -r ../../qre-browser.zip *
     - name: Release
       uses: softprops/action-gh-release@v1
       if: "${{ github.event.inputs.release == 'yes' }}"
       with:
         files: |
-          ./con-reg-exp-*.tgz
-          ./con-reg-exp-*.zip
+          ./qre-*.tgz
+          ./qre-*.zip
         draft: false
         tag_name: ${{ env.RELEASE_TAG }}
         fail_on_unmatched_files: true

@@ -2,13 +2,13 @@
 import fs from 'node:fs';
 import path from 'node:path';
 
-const CJS_FILE = './dist/cjs/con-reg-exp.cjs';
-const MJS_FILE = './dist/esm/con-reg-exp.mjs';
-const CJS_FROM = 'exports.default = cre';
-const CJS_TO = 'module.exports  = cre';
-const BROWSER_FILES = [ './dist/browser/con-reg-exp.min.js', './dist/browser/con-reg-exp.js' ];
+const CJS_FILE = './dist/cjs/qre.cjs';
+const MJS_FILE = './dist/esm/qre.mjs';
+const CJS_FROM = 'exports.default = qre';
+const CJS_TO = 'module.exports  = qre';
+const BROWSER_FILES = [ './dist/browser/qre.min.js', './dist/browser/qre.js' ];
 const BROWSER_FROM = 'GtEa1M6';
-const BROWSER_TO = '{ cre }';
+const BROWSER_TO = '{ qre }';
 
 for (let dest of [CJS_FILE, MJS_FILE]) {
     let src = dest.replace(path.extname(dest), '.js');

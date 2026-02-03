@@ -12,7 +12,7 @@
         "test7": "npx webpack && node dist/main.webpack.js"
     },
     "dependencies": {
-        "con-reg-exp": "^0.0.1"
+        "qre": "^0.0.1"
     },
     "devDependencies": {
         "esbuild": "^0.20.0",

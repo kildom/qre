@@ -4,7 +4,7 @@ import * as fs from 'node:fs';
 import * as showdown from 'showdown';
 import { template } from 'underscore';
 import { DOCS_DIR } from './config';
-import cre from '../../src/con-reg-exp';
+import qre from '../../src/qre';
 
 // For some reasons ESM import doesn't work for them:
 const showdownHighlight = require('showdown-highlight');
@@ -13,9 +13,9 @@ const hljs = require('highlight.js');
 
 export function registerExtensions() {
 
-    hljs.registerLanguage('cre', (hljs) => {
+    hljs.registerLanguage('qre', (hljs) => {
         return {
-            name: 'cre',
+            name: 'qre',
             aliases: [],
             case_insensitive: false,
             keywords: {
@@ -33,11 +33,11 @@ export function registerExtensions() {
                 hljs.COMMENT(/\/\//, /$/),
                 {
                     scope: 'literal',
-                    begin: cre.ignoreCase`"\\", [rnt0]`,
+                    begin: qre.ignoreCase`"\\", [rnt0]`,
                 },
                 {
                     scope: 'keyword',
-                    begin: cre.ignoreCase`
+                    begin: qre.ignoreCase`
                         optional ("lazy-" or "non-greedy-");
                         {
                             "optional";
@@ -58,14 +58,14 @@ export function registerExtensions() {
                 },
                 {
                     scope: 'name',
-                    begin: cre`[a-zA-Z_], repeat [a-zA-Z0-9_], ":"`,
+                    begin: qre`[a-zA-Z_], repeat [a-zA-Z0-9_], ":"`,
                 },
                 {
                     scope: 'string',
                     begin: /"/,
                     end: /"/,
                     contains: [
-                        { begin: cre`"\\", any` },
+                        { begin: qre`"\\", any` },
                         { scope: 'subst', begin: /\${/, end: /}/ },
                     ],
                 },
@@ -74,7 +74,7 @@ export function registerExtensions() {
                     begin: /'/,
                     end: /'/,
                     contains: [
-                        { begin: cre`"\\", any` },
+                        { begin: qre`"\\", any` },
                         { scope: 'subst', begin: /\${/, end: /}/ },
                     ],
                 },
@@ -88,7 +88,7 @@ export function registerExtensions() {
                     begin: /\[/,
                     end: /\]/,
                     contains: [
-                        { begin: cre`"\\", any` },
+                        { begin: qre`"\\", any` },
                         { scope: 'subst', begin: /\${/, end: /}/ },
                     ],
                 },
@@ -99,7 +99,7 @@ export function registerExtensions() {
                 },
                 {
                     scope: 'type',
-                    begin: cre.ignoreCase`
+                    begin: qre.ignoreCase`
                         {
                             "end" or "start" or "begin", "-of-", "text" or "line";
                         } or {
@@ -120,26 +120,26 @@ export function registerExtensions() {
         name: 'javascriptwithcre',
         contains: [
             {
-                begin: /cre(?:\.[a-zA-Z0-9_.]+)?`/,
+                begin: /qre(?:\.[a-zA-Z0-9_.]+)?`/,
                 end: /\B|\b/,
                 starts: {
                     begin: /\B|\b/,
                     end: '`',
                     terminatorEnd: "`",
-                    subLanguage: "cre",
+                    subLanguage: "qre",
                 },
             },
             {
                 scope: 'regexp',
-                begin: cre`"/", lookahead not "/"`,
+                begin: qre`"/", lookahead not "/"`,
                 end: /\/[gimuvsy]*/,
                 contains: [
-                    { begin: cre`"\\", any` },
+                    { begin: qre`"\\", any` },
                     {
                         begin: /\[/,
                         end: /\]/,
                         contains: [
-                            { begin: cre`"\\", any` },
+                            { begin: qre`"\\", any` },
                         ],
                     },
                 ],
@@ -177,7 +177,7 @@ export function registerExtensions() {
     showdown.extension('tryItLink', function () {
         let myext1 = {
             type: 'output',
-            regex: cre.global.ignoreCase`
+            regex: qre.global.ignoreCase`
                 "<p";
                 optional {
                     whitespace;
@@ -194,7 +194,7 @@ export function registerExtensions() {
                 repeat whitespace;
                 "</p>"
             `,
-            replace: '$1 class="try-it-link" target="cre-web-demo">try it</a>',
+            replace: '$1 class="try-it-link" target="qre-web-demo">try it</a>',
         };
         return [myext1];
     });
@@ -223,7 +223,7 @@ export function convertMarkdownText(markdown: string, simple: boolean): string {
     let html = mdConverter.makeHtml(markdown);
     html = html
         .replace(/&amp;nbsp;/g, ' ')
-        .replace(cre.global`".md", lookahead ["#]`, '.html');
+        .replace(qre.global`".md", lookahead ["#]`, '.html');
     if (simple) {
         html = removeTopLevelTag(html);
     }
@@ -231,7 +231,7 @@ export function convertMarkdownText(markdown: string, simple: boolean): string {
 }
 
 export function removeTopLevelTag(html: string): string {
-    return html.replace(cre.global.ignoreCase`
+    return html.replace(qre.global.ignoreCase`
         begin-of-text;
         repeat whitespace;
         "<", tag: repeat [a-z], lazy-repeat any, ">";

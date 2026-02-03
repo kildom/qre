@@ -1,10 +1,10 @@
 // Match JS floating point number
 
-import cre from 'con-reg-exp';
+import qre from 'qre';
 
-// Convenient Regular Expression
+// Quick Regular Expression
 
-const number = cre.global`
+const number = qre.global`
     optional [+-];                    // Sign
     {
         at-least-1 digit;             // Integral part

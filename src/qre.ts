@@ -76,7 +76,7 @@ function escapeCharacterClass(text: string, vmode: boolean) {
 
 /**
  * The class extends the native JavaScript `Error` class to provide
- * error handling specifically for syntax and logic errors in the Convenient Regular Expressions.
+ * error handling specifically for syntax and logic errors in the Quick Regular Expressions.
  */
 class CREError extends Error { };
 
@@ -109,7 +109,7 @@ const quantifierRegExp = /^(?<lazy>lazy-|non-greedy-)?(?:(?<optional>optional)|(
 
 /**
  * Regular expression flags. Meaning the same as in RegExp class with additional `cache` field that controls
- * Convenient Regular Expression cache.
+ * Quick Regular Expression cache.
  */
 interface Flags {
     multiline: boolean;
@@ -133,7 +133,7 @@ interface ExpressionSource {
 }
 
 /**
- * Interface embedded to the RegExp object created from the Convenient Regular Expression that provides information
+ * Interface embedded to the RegExp object created from the Quick Regular Expression that provides information
  * needed to reuse the expression in a different one.
  */
 interface ExpressionTokenized extends ExpressionSource {
@@ -389,7 +389,7 @@ function tokenize(text: string, interpolationPrefix: string, values: (string | E
                 result = result.concat(innerTokens);
                 result.push({ position, beginOfLine: false, type: TokenType.InterpolationEnd });
             } else {
-                // Convenient Regular Expression, first check if significant flags are the same.
+                // Quick Regular Expression, first check if significant flags are the same.
                 if (flags.ignoreCase !== value.flags.ignoreCase) {
                     throw new TokenizerError(position, `Mismatching "ignoreCase" flag in interpolated expression. ` +
                         `Outer expression: "${flags.ignoreCase ? 'set' : 'unset'}", ` +
@@ -1236,7 +1236,7 @@ type CacheNode = Map<string | number, CacheNode | RegExp>;
 const cache = new Map<string, CacheNode | RegExp>();
 const cacheExpId = new WeakMap<RegExp, number>();
 let cacheExpIdLast = 1;
-const proxyCache: { [key: string]: typeof cre } = {};
+const proxyCache: { [key: string]: typeof qre } = {};
 
 
 function creImpl(flags: Partial<Flags>, str: TemplateStringsArray, ...values: any[]): RegExp {
@@ -1336,25 +1336,25 @@ const proxyHandler = {
 
 /**
  * The function is a tagged template literal function that produces RegExp object from
- * the Convenient Regular Expression.
+ * the Quick Regular Expression.
  */
-export default function cre(str: TemplateStringsArray, ...values: any[]): RegExp {
+export default function qre(str: TemplateStringsArray, ...values: any[]): RegExp {
     return creImpl({}, str, ...values);
 }
 
 
-cre.indices = new Proxy(() => ({ _id: 'indices', indices: true }), proxyHandler) as typeof cre;
-cre.global = new Proxy(() => ({ _id: 'global', global: true }), proxyHandler) as typeof cre;
-cre.ignoreCase = new Proxy(() => ({ _id: 'ignoreCase', ignoreCase: true }), proxyHandler) as typeof cre;
-cre.legacy = new Proxy(() => ({ _id: 'legacy', unicode: false }), proxyHandler) as typeof cre;
-cre.unicode = new Proxy(() => ({ _id: 'unicode', unicodeSets: true }), proxyHandler) as typeof cre;
-cre.sticky = new Proxy(() => ({ _id: 'sticky', sticky: true }), proxyHandler) as typeof cre;
-cre.cache = new Proxy(() => ({ _id: 'cache', cache: true }), proxyHandler) as typeof cre;
-cre.Error = CREError;
+qre.indices = new Proxy(() => ({ _id: 'indices', indices: true }), proxyHandler) as typeof qre;
+qre.global = new Proxy(() => ({ _id: 'global', global: true }), proxyHandler) as typeof qre;
+qre.ignoreCase = new Proxy(() => ({ _id: 'ignoreCase', ignoreCase: true }), proxyHandler) as typeof qre;
+qre.legacy = new Proxy(() => ({ _id: 'legacy', unicode: false }), proxyHandler) as typeof qre;
+qre.unicode = new Proxy(() => ({ _id: 'unicode', unicodeSets: true }), proxyHandler) as typeof qre;
+qre.sticky = new Proxy(() => ({ _id: 'sticky', sticky: true }), proxyHandler) as typeof qre;
+qre.cache = new Proxy(() => ({ _id: 'cache', cache: true }), proxyHandler) as typeof qre;
+qre.Error = CREError;
 
 // Fix some module importing problems
-cre.default = cre;
-cre.cre = cre;
-export { cre };
+qre.default = qre;
+qre.qre = qre;
+export { qre };
 
 // #endregion

@@ -2,7 +2,7 @@
 import * as fs from 'node:fs';
 
 import * as showdown from 'showdown';
-import cre from '../../src/con-reg-exp';
+import qre from '../../src/qre';
 
 import { template } from 'underscore';
 import { execFileSync } from 'node:child_process';
@@ -20,7 +20,7 @@ interface Sources {
 };
 
 
-const dictionaryText = "JSON.stringify(.parse( RegExp(.input(.lastMatch(.lastParen(.leftContext(.rightContext(.compile(.exec(.test(.toString(.replace(.match(.matchAll(;\n                                // `;\n\n    \n\nconsole.log(\n\nconst \n\nlet undefined \n\nvar \n\nif (\n\nfor (\n\nwhile (\n\nswitch (    case of in instanceof new true false do {\n    this. break;\n return    } else {\n        } or {\n        ) {\n        }\n);\n\n`;\n\n';\n\n\";\n\n/* */\n\n// = + - * / || && += -= *= ++;\n --;\n == === !== != >= <= < > ?? & | ~ ^ << >> >>> ... \nimport cre from 'con-reg-exp';\n\nimport cre from \"con-reg-exp\";\n\n = cre`.indices`.global`.ignoreCase`.legacy`.unicode`.sticky`.cache`optional begin-of-text; end-of-text; begin-of-line; end-of-line; word-boundary; repeat at-least-1 at-most-times -to- not new-line; line-feed; carriage-return; tabulation; null; space; any; digit; white-space; whitespace; word-character; line-terminator; prop< property< lookahead look-ahead lookbehind look-behind group \"${}\" '${}' ${ ";
+const dictionaryText = "JSON.stringify(.parse( RegExp(.input(.lastMatch(.lastParen(.leftContext(.rightContext(.compile(.exec(.test(.toString(.replace(.match(.matchAll(;\n                                // `;\n\n    \n\nconsole.log(\n\nconst \n\nlet undefined \n\nvar \n\nif (\n\nfor (\n\nwhile (\n\nswitch (    case of in instanceof new true false do {\n    this. break;\n return    } else {\n        } or {\n        ) {\n        }\n);\n\n`;\n\n';\n\n\";\n\n/* */\n\n// = + - * / || && += -= *= ++;\n --;\n == === !== != >= <= < > ?? & | ~ ^ << >> >>> ... \nimport qre from 'qre';\n\nimport qre from \"qre\";\n\n = qre`.indices`.global`.ignoreCase`.legacy`.unicode`.sticky`.cache`optional begin-of-text; end-of-text; begin-of-line; end-of-line; word-boundary; repeat at-least-1 at-most-times -to- not new-line; line-feed; carriage-return; tabulation; null; space; any; digit; white-space; whitespace; word-character; line-terminator; prop< property< lookahead look-ahead lookbehind look-behind group \"${}\" '${}' ${ ";
 const encoder = new TextEncoder();
 const dictionary = encoder.encode(JSON.stringify(dictionaryText));
 
@@ -50,14 +50,14 @@ let templateData = {
 
 function getHtmlId(markdownText: string): string {
     let x = convertMarkdownText('#' + markdownText.trim(), false);
-    return x.match(cre`"id=\"", id: lazy-repeat any, "\""`)?.groups?.id || '';
+    return x.match(qre`"id=\"", id: lazy-repeat any, "\""`)?.groups?.id || '';
 }
 
 function readSources(): Sources {
 
     let indexText = fs.readFileSync('docs/index.md', 'utf8');
 
-    let m = indexText.match(cre`
+    let m = indexText.match(qre`
         menuText: lazy-repeat any;
         begin-of-line, "#";
         at-least-1 whitespace;
@@ -68,7 +68,7 @@ function readSources(): Sources {
 
     let sources: Sources = m?.groups as any;
     templateData.title = convertMarkdownText(sources.title, true);
-    templateData.copy = convertMarkdownText(sources.contentText.match(cre.cache`
+    templateData.copy = convertMarkdownText(sources.contentText.match(qre.cache`
         begin-of-line;
         copy: {
             repeat not term;
@@ -79,7 +79,7 @@ function readSources(): Sources {
 }
 
 function processMenu(menuText: string) {
-    let all = menuText.matchAll(cre.global.cache`
+    let all = menuText.matchAll(qre.global.cache`
         begin-of-line;
         repeat whitespace;
         "*";
@@ -92,7 +92,7 @@ function processMenu(menuText: string) {
 }
 
 function processSubtitle(subtitlesText: string) {
-    let all = subtitlesText.matchAll(cre.global.cache`
+    let all = subtitlesText.matchAll(qre.global.cache`
         begin-of-line;
         repeat whitespace;
         "*";
@@ -112,7 +112,7 @@ function processSubtitle(subtitlesText: string) {
 }
 
 function parseSections(text: string, level: number): { title: string, content: string }[] {
-    let all = text.matchAll(cre.global.cache`
+    let all = text.matchAll(qre.global.cache`
         begin-of-line, ${level} "#";
         at-least-1 whitespace;
         title: repeat not term;
@@ -147,7 +147,7 @@ function createDemoURL(fileName: string, code: string): string {
     let textData = fileName + '\0' + code;
     let data = encoder.encode(textData);
     let output = deflateSync(data, { level: 9, dictionary, mem: 9 });
-    let url = 'https://kildom.github.io/cre-web-demo/#1' + Buffer.from(output).toString('base64');
+    let url = 'https://kildom.github.io/qre-web-demo/#1' + Buffer.from(output).toString('base64');
     return url;
 }
 
@@ -159,12 +159,12 @@ function processSamples() {
     for (let file of fs.readdirSync('docs/samples').sort()) {
         if (!file.endsWith('.mjs')) continue;
         let sourceCode = fs.readFileSync(`docs/samples/${file}`, 'utf-8');
-        let pattern = cre`
+        let pattern = qre`
             begin-of-text;
             lazy-repeat any;
             begin-of-line, "//", title: repeat not term;
             lazy-repeat any;
-            begin-of-line, "// Convenient Regular Expression";
+            begin-of-line, "// Quick Regular Expression";
             code: lazy-repeat any;
             begin-of-line, "// Usage";
         `;
@@ -172,7 +172,7 @@ function processSamples() {
         let title = m?.groups?.title?.trim() || '';
         let code = m?.groups?.code?.trim() || '';
         let out = execFileSync(process.execPath, [`docs/samples/${file}`], { encoding: 'utf8' });
-        m = out.match(cre`begin-of-line, "Compiled:", regexp: repeat not term`);
+        m = out.match(qre`begin-of-line, "Compiled:", regexp: repeat not term`);
         let regexp = m?.groups?.regexp?.trim() || '';
         let maxLineLength = code.split('\n').reduce((max, x) => Math.max(max, x.length), 50);
         let regexpLines = Math.ceil(regexp.length / maxLineLength);
@@ -189,7 +189,7 @@ function processSamples() {
             title: markdownHighlight('// ' + title, 'javascript'),
             code: markdownHighlight(code, 'javascriptwithcre'),
             regexp: markdownHighlight(regexpSplitted.join('↩'), 'javascript').replace(/↩/g, '↩\n'),
-            demoURL: createDemoURL(file.replace(cre`begin-of-text, repeat digit, "."`, ''), sourceCode),
+            demoURL: createDemoURL(file.replace(qre`begin-of-text, repeat digit, "."`, ''), sourceCode),
         });
     }
 }
