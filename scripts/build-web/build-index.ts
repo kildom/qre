@@ -147,7 +147,7 @@ function createDemoURL(fileName: string, code: string): string {
     let textData = fileName + '\0' + code;
     let data = encoder.encode(textData);
     let output = deflateSync(data, { level: 9, dictionary, mem: 9 });
-    let url = 'https://kildom.github.io/qre-web-demo/#1' + Buffer.from(output).toString('base64');
+    let url = 'https://kildom.github.io/qre-web-demo/#2' + Buffer.from(output).toString('base64');
     return url;
 }
 
